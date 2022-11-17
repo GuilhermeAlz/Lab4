@@ -1,13 +1,10 @@
 package ControleDeAlunos;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-
 public class Aluno {
     private String matricula;
     private String nome;
     private String curso;
+
 
     public Aluno(String matricula, String nome, String curso) {
         this.matricula = matricula;
@@ -15,10 +12,12 @@ public class Aluno {
         this.curso = curso;
     }
 
+
     @Override
     public int hashCode() {
         return this.matricula.hashCode();
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -33,6 +32,7 @@ public class Aluno {
         return this.matricula.equals(al.matricula);
     }
 
+    
     @Override
     public String toString() {
         return this.matricula + " - " + this.nome + " - " + this.curso; 

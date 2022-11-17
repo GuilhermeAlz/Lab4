@@ -6,7 +6,14 @@ import java.util.HashSet;
 
 public class Controle {
     private HashMap<String, Aluno> alunos;
-    private HashSet<Grupo> grupos;
+    private HashMap<String, Grupo> grupos;
+
+
+    public Controle() {
+        this.alunos = new HashMap<String, Aluno>();
+        this.grupos = new HashMap<String, Grupo>();
+    }
+    
 
     public void cadastraAluno(String matricula, String nome, String curso) {
         Aluno aluno = new Aluno(matricula, nome, curso);
@@ -18,25 +25,28 @@ public class Controle {
         }
     }
 
+
     public void criaGrupo(String tema) {
         Grupo grupo = new Grupo(tema.toLowerCase());
 
-        if (!this.grupos.contains(grupo)) {
-            grupos.add(grupo);
+        if (!this.grupos.containsKey(tema)) {
+            grupos.put(tema, grupo);
         } else {
             throw new IllegalArgumentException("GRUPO JÁ CADASTRADO!");
         }
     }
+
 
     public void criaGrupo(String tema, int tamanho) {
         Grupo grupo = new Grupo(tema.toLowerCase(), tamanho);
 
-        if (!this.grupos.contains(grupo)) {
-            grupos.add(grupo);
+        if (!this.grupos.containsKey(tema)) {
+            grupos.put(tema, grupo);
         } else {
             throw new IllegalArgumentException("GRUPO JÁ CADASTRADO!");
         }
     }
+
 
     public String consultaAluno(String matricula) {
         if (this.alunos.get(matricula) != null) {
@@ -46,53 +56,46 @@ public class Controle {
         }
     }
 
+
     public void alocarAlunoEmGrupo(String matricula, String tema) {
         if (!this.alunos.containsKey(matricula)) {
             throw new IllegalArgumentException("ALUNO NÃO CADASTRADO.");
         }
-        if (!grupoCadastrado(tema)) {
+        if (!this.grupos.containsKey(tema)) {
             throw new IllegalArgumentException("GRUPO NÃO CADASTRADO");
         }
 
         Aluno aluno = this.alunos.get(matricula);
-        for (Grupo gru : this.grupos) {
-            if (gru.getTema().equals(tema)) {
-                gru.adicionaAluno(aluno);
-            }
-        }
+        Grupo grupo = this.grupos.get(tema);
+
+        grupo.adicionaAluno(aluno);
     }
 
-    private boolean grupoCadastrado(String tema) {
-        for (Grupo gru : this.grupos) {
-            if (gru.getTema().equals(tema)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public boolean pertinenciaGrupo(String tema, String matricula) {
-        if (!grupoCadastrado(tema)) {
+        if (!this.grupos.containsKey(tema)) {
             throw new IllegalArgumentException("GRUPO NÃO CADASTRADO");
         }
 
-        for (Grupo grupo : this.grupos) {
-            for(Aluno aluno : grupo.getAlunos()) {
-                if (aluno.equals(this.alunos.get(matricula))) {
-                    return true;
-                }
-            }
+        Grupo grupo = this.grupos.get(tema);
+
+        if (grupo.getAlunos().contains(this.alunos.get(matricula))) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
+
 
     public String checagemGrupos(String matricula) {
         String out = "";
 
-        for (Grupo grupo : this.grupos) {
-            for(Aluno aluno : grupo.getAlunos()) {
-                if (aluno.equals(this.alunos.get(matricula))) {
-                    out += "\n- " + grupo.getTema() + " " + grupo.getAlunos().size() + "/" + grupo.getTamanho();
+        for (Grupo grupo : this.grupos.values()) {         
+            if (grupo.getAlunos().contains(this.alunos.get(matricula))) {
+                if (grupo.getTamanho() == Integer.MAX_VALUE) {
+                    out += "\n- " + grupo.getTema() + " " + grupo.getAlunos().size() + "/Ilimitado"; 
+                } else {
+                    out += "\n- " + grupo.getTema() + " " + grupo.getAlunos().size() + "/" + grupo.getTamanho();            
                 }
             }
         }

@@ -9,27 +9,35 @@ public class Grupo {
     private HashSet<Aluno> alunos;
     private int tamanho;
     
+
     public Grupo(String tema, int tamanho) {
         this.tema = tema;
+        this.alunos = new HashSet<Aluno>();
         this.tamanho = tamanho;
     }
 
+
     public Grupo(String tema) {
         this.tema = tema;
+        this.alunos = new HashSet<Aluno>();
         this.tamanho = Integer.MAX_VALUE;
     }
+
 
     public String getTema() {
         return this.tema;
     }
 
+
     public HashSet<Aluno> getAlunos() {
         return this.alunos;
     }
 
+
     public int getTamanho() {
         return this.tamanho;
     }
+
 
     public void adicionaAluno(Aluno aluno) {
         if (this.alunos.size() < tamanho) {
@@ -39,10 +47,12 @@ public class Grupo {
         }
     }
 
+
     @Override
     public int hashCode() {
         return this.tema.hashCode();
     }
+
 
     @Override
     public boolean equals(Object o) {
