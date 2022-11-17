@@ -2,6 +2,9 @@ package ControleDeAlunos;
 
 import java.util.Scanner;
 
+/**
+ * Interface com menus de texto do programa.
+ */
 public class Main {
     public static void main(String[] args) {
         Controle controle = new Controle();
@@ -14,7 +17,12 @@ public class Main {
         }
     }
         
-
+        /**
+         * Imprime o menu do programa e retorna a opcao.
+         * 
+         * @param scanner Scanner.
+         * @return Opcao escolhida pelo usuario.
+         */
         private static String menu(Scanner scanner) {
             System.out.println(
                     "\n---\nMENU\n" + 
@@ -29,6 +37,13 @@ public class Main {
             return scanner.next().toUpperCase();
         }
 
+        /**
+         * Switch case que usa a opcao do usuario para selecionar o comando correto a ser executado.
+         * 
+         * @param opcao Opcao que o usuario escolheu.
+         * @param controle Classe de controle do sistema.
+         * @param scanner Scanner.
+         */
         private static void comando(String opcao, Controle controle, Scanner scanner) {
             switch (opcao) {
             case "C":
@@ -66,7 +81,12 @@ public class Main {
             }
         }
 
-
+        /**
+         * Cadastra um aluno no sistema.
+         * 
+         * @param controle Classe de controle do sistema.
+         * @param scanner Scanner.
+         */
         private static void cadastraAluno(Controle controle, Scanner scanner) {
             System.out.print("\nMatrícula: ");
             scanner.nextLine();
@@ -87,7 +107,12 @@ public class Main {
             }
         }
 
-
+        /**
+         * Exibe o aluno cadastrado em forma de string.
+         * 
+         * @param controle Classe de controle do sistema.
+         * @param scanner Scanner.
+         */
         private static void exibeAluno(Controle controle, Scanner scanner) {
             System.out.print("\nMatrícula: ");
             scanner.nextLine();
@@ -100,6 +125,12 @@ public class Main {
             }
         }
 
+        /**
+         * Cria um novo grupo no sistema
+         * 
+         * @param controle Classe de controle do sistema.
+         * @param scanner Scanner.
+         */
         private static void novoGrupo(Controle controle, Scanner scanner) {
             System.out.println("\nGrupo: ");
             scanner.nextLine();
@@ -123,6 +154,12 @@ public class Main {
             }
         }
 
+        /**
+         * Adiciona um aluno ja cadastrado a um grupo criado previamente no sistema.
+         * 
+         * @param controle Classe de controle do sistema.
+         * @param scanner Scanner.
+         */
         private static void alocarAluno(Controle controle, Scanner scanner) {
            System.out.println("\nMatricula: ");
            scanner.nextLine();
@@ -139,6 +176,12 @@ public class Main {
            }
         }
 
+        /**
+         * Verifica se um aluno ja cadastrado pertence ou nao a um grupo especificado pelo usuario.
+         * 
+         * @param controle Classe de controle do sistema.
+         * @param scanner Scanner.
+         */
         private static void pertinenciaGrupo(Controle controle, Scanner scanner) {
             System.out.println("\nGrupo: ");
             scanner.nextLine();
@@ -158,6 +201,12 @@ public class Main {
             }
         }
 
+        /**
+         * Imprime todos os grupos que um aluno especificado pelo usuario faz parte e sua lotacao.
+         * 
+         * @param controle Classe de controle do sistema.
+         * @param scanner Scanner.
+         */
         private static void checarGruposAluno(Controle controle, Scanner scanner) {
             System.out.println("\nAluno: ");
             scanner.nextLine();
@@ -171,6 +220,9 @@ public class Main {
             }
         }
 
+        /**
+         * Encerra o programa.
+         */
         private static void sai() {
             System.out.println("Fechando o programa.");
             System.exit(0);
