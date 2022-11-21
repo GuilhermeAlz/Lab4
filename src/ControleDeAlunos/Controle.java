@@ -42,8 +42,8 @@ public class Controle {
     public void criaGrupo(String tema) {
         Grupo grupo = new Grupo(tema.toLowerCase());
 
-        if (!this.grupos.containsKey(tema)) {
-            grupos.put(tema, grupo);
+        if (!this.grupos.containsKey(tema.toLowerCase())) {
+            grupos.put(tema.toLowerCase(), grupo);
         } else {
             throw new IllegalArgumentException("GRUPO JÁ CADASTRADO!");
         }
@@ -58,8 +58,8 @@ public class Controle {
     public void criaGrupo(String tema, int tamanho) {
         Grupo grupo = new Grupo(tema.toLowerCase(), tamanho);
 
-        if (!this.grupos.containsKey(tema)) {
-            grupos.put(tema, grupo);
+        if (!this.grupos.containsKey(tema.toLowerCase())) {
+            grupos.put(tema.toLowerCase(), grupo);
         } else {
             throw new IllegalArgumentException("GRUPO JÁ CADASTRADO!");
         }
@@ -89,12 +89,15 @@ public class Controle {
         if (!this.alunos.containsKey(matricula)) {
             throw new IllegalArgumentException("ALUNO NÃO CADASTRADO.");
         }
-        if (!this.grupos.containsKey(tema)) {
+        if (!this.grupos.containsKey(tema.toLowerCase())) {
             throw new IllegalArgumentException("GRUPO NÃO CADASTRADO");
+        }
+        if (this.grupos.get(tema.toLowerCase()).getAlunos().contains(this.alunos.get(matricula))) {
+        	throw new IllegalArgumentException("ALUNO JA CADASTRADO NO GRUPO");
         }
 
         Aluno aluno = this.alunos.get(matricula);
-        Grupo grupo = this.grupos.get(tema);
+        Grupo grupo = this.grupos.get(tema.toLowerCase());
 
         grupo.adicionaAluno(aluno);
     }
@@ -107,11 +110,14 @@ public class Controle {
      * @return Booleano que confirma ou nega a presenca do aluno no grupo.
      */
     public boolean pertinenciaGrupo(String tema, String matricula) {
-        if (!this.grupos.containsKey(tema)) {
+        if (!this.grupos.containsKey(tema.toLowerCase())) {
             throw new IllegalArgumentException("GRUPO NÃO CADASTRADO");
         }
+        if (!this.alunos.containsKey(matricula)) {
+            throw new IllegalArgumentException("ALUNO NAO CADASTRADO");
+        }
 
-        Grupo grupo = this.grupos.get(tema);
+        Grupo grupo = this.grupos.get(tema.toLowerCase());
 
         if (grupo.getAlunos().contains(this.alunos.get(matricula))) {
             return true;
