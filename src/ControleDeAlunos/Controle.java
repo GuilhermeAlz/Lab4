@@ -1,8 +1,6 @@
 package ControleDeAlunos;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * Classe sistema que controla os alunos e os grupos. 
