@@ -40,7 +40,7 @@ public class Controle {
      * @param tema Tema do grupo em questao.
      */
     public void criaGrupo(String tema) {
-        Grupo grupo = new Grupo(tema.toLowerCase());
+        Grupo grupo = new Grupo(tema);
 
         if (!this.grupos.containsKey(tema.toLowerCase())) {
             grupos.put(tema.toLowerCase(), grupo);
@@ -56,7 +56,7 @@ public class Controle {
      * @param tamanho Tamanho limite do grupo a ser criado.
      */
     public void criaGrupo(String tema, int tamanho) {
-        Grupo grupo = new Grupo(tema.toLowerCase(), tamanho);
+        Grupo grupo = new Grupo(tema, tamanho);
 
         if (!this.grupos.containsKey(tema.toLowerCase())) {
             grupos.put(tema.toLowerCase(), grupo);
